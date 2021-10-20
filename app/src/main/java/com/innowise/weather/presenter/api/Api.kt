@@ -1,6 +1,5 @@
 package com.innowise.weather.presenter.api
 
-import android.database.Observable
 import com.innowise.weather.model.Forecast
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response

@@ -14,4 +14,6 @@ object ServiceLocator {
     inline fun <reified T: Any> locate() = get(T::class)
 
     inline fun <reified T: Any> locateLazy(): Lazy<T> = lazy { get(T::class) }
+
+    fun <T: Any> checkExistence(kClass: KClass<T>) = instances[kClass] != null
 }
