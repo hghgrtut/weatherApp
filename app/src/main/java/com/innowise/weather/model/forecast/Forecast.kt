@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class Forecast(
-    @Json(name = "list") val weatherList: List<ConcreteForecast>,
+    @Json(name = "list") var forecastList: List<ConcreteForecast>,
     @Json(name = "city") val city: City
 ) {
     fun getCity(): String = city.name

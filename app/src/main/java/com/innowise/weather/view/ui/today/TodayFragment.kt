@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.innowise.weather.R
 import com.innowise.weather.databinding.FragmentTodayBinding
-import com.innowise.weather.model.forecast.Forecast
 import com.innowise.weather.model.forecast.concreteforecast.ConcreteForecast
 import com.innowise.weather.view.activity.ProgressBarActivity
 import com.innowise.weather.view.ui.SharedViewModel
@@ -35,10 +34,10 @@ class TodayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.forecast.observe(viewLifecycleOwner,{ forecastList ->
+        viewModel.forecast.observe(viewLifecycleOwner, { forecastList ->
             (requireActivity() as ProgressBarActivity).hideProgressBar()
             binding.city.text = forecastList.getCity()
-            val forecast = forecastList.weatherList.first()
+            val forecast = forecastList.forecastList.first()
             displayWeather(forecast)
             binding.share.setOnClickListener {
                 val intent = Intent(Intent.ACTION_SEND)

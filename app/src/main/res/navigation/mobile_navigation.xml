@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/nanavigation_today">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/nanavigation_today"
         android:name="com.innowise.weather.view.ui.today.TodayFragment"
         android:label="@string/today"
         tools:layout="@layout/fragment_today" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_forecast"
         android:name="com.innowise.weather.view.ui.forecast.ForecastFragment"
         android:label="@string/forecast"
         tools:layout="@layout/fragment_forecast" />

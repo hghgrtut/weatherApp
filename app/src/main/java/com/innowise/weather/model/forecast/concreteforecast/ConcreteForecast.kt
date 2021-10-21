@@ -12,7 +12,8 @@ data class ConcreteForecast(
     @Json(name = "main") val main: MainInfo,
     @Json(name = "weather") val weather: List<Weather>,
     @Json(name = "wind") val wind: Wind,
-    @Json(name = "pop") val rainProbability: Double
+    @Json(name = "pop") val rainProbability: Double,
+    @Json(name = "dt_txt") val dateTime: String
 ) {
     fun getPictureRes(): Int = requireNotNull(pictureStringToRes[weather.first().icon])
     fun getOverview(): String = weather.joinToString(", ") { it.description }

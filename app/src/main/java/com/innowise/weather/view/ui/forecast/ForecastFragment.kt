@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.innowise.weather.databinding.FragmentForecastBinding
+import com.innowise.weather.view.activity.ProgressBarActivity
 import com.innowise.weather.view.ui.SharedViewModel
 
 class ForecastFragment : Fragment() {
@@ -27,6 +30,14 @@ class ForecastFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        with(binding.list) {
+            layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+            viewModel.forecast.observe(viewLifecycleOwner, {
+                (requireActivity() as ProgressBarActivity).hideProgressBar()
+                adapter = ForecastAdapter(it.forecastList)
+            })
+        }
     }
 
     override fun onDestroyView() {
