@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Weather</string>
     <string name="today">Сегодня</string>
+    <string name="error">Ошибка!! Нужна геолокация для показа погоды вашей локации!</string>
+    <string name="error_no_internet">Ошибка!! Нужен интернет для первого запуска!</string>
     <string name="forecast">Прогноз</string>
     <string name="overview_today">%1$d °C | %2$s</string>
     <string name="degrees">%1$d °C</string>

@@ -10,7 +10,9 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.StringRes
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -22,10 +24,12 @@ import com.innowise.weather.R
 import com.innowise.weather.app.ServiceLocator
 import com.innowise.weather.databinding.ActivityMainBinding
 import com.innowise.weather.view.ui.SharedViewModel
+import java.net.UnknownHostException
 
 class MainActivity : AppCompatActivity(), ProgressBarActivity {
 
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: SharedViewModel by viewModels()
 
     override fun hideProgressBar() = binding.progressBar.setVisibility(View.GONE)
 
@@ -34,6 +38,7 @@ class MainActivity : AppCompatActivity(), ProgressBarActivity {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel.error.observe(this) { showToast(it) }
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
             PackageManager.PERMISSION_GRANTED
         ) {
@@ -62,14 +67,12 @@ class MainActivity : AppCompatActivity(), ProgressBarActivity {
             override fun onProviderDisabled(provider: String) = Unit
 
             override fun onLocationChanged(location: Location) {
-                Log.d("GGG", "location changed")
                 ServiceLocator.register(location)
-                val viewModel: SharedViewModel by viewModels()
                 viewModel.loadForecast()
             }
         }
         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-        val provider = locationManager.getBestProvider(Criteria(), true)
+        val provider = locationManager.getBestProvider(Criteria(), true)!!
         locationManager.requestSingleUpdate(provider,  listener, null)
     }
 
@@ -80,9 +83,13 @@ class MainActivity : AppCompatActivity(), ProgressBarActivity {
     ) {
         if (requestCode == REQ_CODE &&
             grantResults.size == 1 &&
-            grantResults.first() == PackageManager.PERMISSION_GRANTED) { loadForecast() }
+            grantResults.first() == PackageManager.PERMISSION_GRANTED) { loadForecast()
+        } else { showToast(R.string.error) }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
+
+    private fun showToast(@StringRes strRes: Int) =
+        Toast.makeText(this, strRes, Toast.LENGTH_LONG).show()
 
     companion object {
         private const val REQ_CODE = 132312
