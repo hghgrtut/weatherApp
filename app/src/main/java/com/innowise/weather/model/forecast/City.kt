@@ -1,4 +1,4 @@
-package com.innowise.weather.model
+package com.innowise.weather.model.forecast
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">Weather</string>
-    <string name="today">Home</string>
-    <string name="forecast">Notifications</string>
+    <string name="today">Сегодня</string>
+    <string name="forecast">Прогноз</string>
+    <string name="overview_today">%1$d °C | %2$s</string>
+    <string name="degrees">%1$d °C</string>
+    <string name="pressure">%1$d мм рт.ст.</string>
+    <string name="probability">%1$d %%</string>
+    <string name="share">Поделиться</string>
+    <string name="string_main_info">Температура %1$d°C, ощущается как %2$d°C. Давление %3$d мм рт.ст.. Влажность  %4$d%%.</string>
+    <string name="string_rain">Вероятность дождя %1$d%%.</string>
+    <string name="string_wind">Ветер %1$d м/с, порывы до %1$d м/с.</string>
+    <string name="wind_speed">%1$d м/с</string>
 </resources>

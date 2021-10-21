@@ -1,12 +1,15 @@
-package com.innowise.weather.view
+package com.innowise.weather.view.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.location.Criteria
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,9 +23,11 @@ import com.innowise.weather.app.ServiceLocator
 import com.innowise.weather.databinding.ActivityMainBinding
 import com.innowise.weather.view.ui.SharedViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ProgressBarActivity {
 
     private lateinit var binding: ActivityMainBinding
+
+    override fun hideProgressBar() = binding.progressBar.setVisibility(View.GONE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +38,8 @@ class MainActivity : AppCompatActivity() {
             PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
-                this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQ_CODE)
+                this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQ_CODE
+            )
         } else {
             loadForecast()
         }
@@ -56,13 +62,15 @@ class MainActivity : AppCompatActivity() {
             override fun onProviderDisabled(provider: String) = Unit
 
             override fun onLocationChanged(location: Location) {
+                Log.d("GGG", "location changed")
                 ServiceLocator.register(location)
                 val viewModel: SharedViewModel by viewModels()
                 viewModel.loadForecast()
             }
         }
-        val locationManager: LocationManager = (getSystemService(LOCATION_SERVICE) as LocationManager)
-        locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER,  listener, null)
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        val provider = locationManager.getBestProvider(Criteria(), true)
+        locationManager.requestSingleUpdate(provider,  listener, null)
     }
 
     override fun onRequestPermissionsResult(

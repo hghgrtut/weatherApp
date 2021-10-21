@@ -1,6 +1,6 @@
 package com.innowise.weather.presenter.api
 
-import com.innowise.weather.model.Forecast
+import com.innowise.weather.model.forecast.Forecast
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -29,6 +29,6 @@ interface ApiInterface {
         @Query(value = "lon") longitude: Double,
         @Query(value = "appid") key: String = "18da837ea3a2403adb97bd229286f8f7",
         @Query(value = "units") units: String = "metric",
-        @Query(value = "units") lang: String = "ru",
+        @Query(value = "lang") lang: String = "ru",
     ): Single<Response<Forecast>>
 }
