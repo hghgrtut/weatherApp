@@ -8,23 +8,21 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.innowise.weather.R
 import com.innowise.weather.app.ServiceLocator
 import com.innowise.weather.databinding.ActivityMainBinding
 import com.innowise.weather.view.ui.SharedViewModel
-import java.net.UnknownHostException
 
 class MainActivity : AppCompatActivity(), ProgressBarActivity {
 
@@ -73,7 +71,7 @@ class MainActivity : AppCompatActivity(), ProgressBarActivity {
         }
         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
         val provider = locationManager.getBestProvider(Criteria(), true)!!
-        locationManager.requestSingleUpdate(provider,  listener, null)
+        locationManager.requestSingleUpdate(provider, listener, null)
     }
 
     override fun onRequestPermissionsResult(

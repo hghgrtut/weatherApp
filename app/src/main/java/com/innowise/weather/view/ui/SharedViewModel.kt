@@ -1,7 +1,6 @@
 package com.innowise.weather.view.ui
 
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,7 +27,7 @@ class SharedViewModel : ViewModel() {
                 json ?: throw UnknownHostException()
                 Gson().fromJson(json, Forecast::class.java)
             }
-            .subscribe ({ value -> _forecast.postValue(value) },
+            .subscribe({ value -> _forecast.postValue(value) },
                 { _error.postValue(R.string.error_no_internet) })
     }
 }

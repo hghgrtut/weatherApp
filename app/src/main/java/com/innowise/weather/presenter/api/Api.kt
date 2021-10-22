@@ -4,13 +4,13 @@ import com.innowise.weather.model.forecast.Forecast
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.http.GET
-import retrofit2.http.Query
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 object ApiImplementation {
-    private val baseUrl = "http://api.openweathermap.org/data/2.5/"
+    private const val baseUrl = "http://api.openweathermap.org/data/2.5/"
     private val service = Retrofit.Builder()
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .addConverterFactory(MoshiConverterFactory.create())
@@ -29,6 +29,6 @@ interface ApiInterface {
         @Query(value = "lon") longitude: Double,
         @Query(value = "appid") key: String = "18da837ea3a2403adb97bd229286f8f7",
         @Query(value = "units") units: String = "metric",
-        @Query(value = "lang") lang: String = "ru",
+        @Query(value = "lang") lang: String = "ru"
     ): Single<Response<Forecast>>
 }

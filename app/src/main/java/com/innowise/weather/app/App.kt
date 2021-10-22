@@ -5,7 +5,7 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import com.innowise.weather.app.ServiceLocator.register
 
-class App: Application() {
+class App : Application() {
     override fun onCreate() {
         super.onCreate()
         register(applicationContext)

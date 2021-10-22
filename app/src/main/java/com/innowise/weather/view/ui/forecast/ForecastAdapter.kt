@@ -9,8 +9,8 @@ import com.innowise.weather.databinding.ItemBinding
 import com.innowise.weather.model.forecast.concreteforecast.ConcreteForecast
 import kotlin.math.roundToInt
 
-class ForecastAdapter(private val forecastList: List<ConcreteForecast>)
-    : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
+class ForecastAdapter(private val forecastList: List<ConcreteForecast>) :
+    RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item, parent, false))
