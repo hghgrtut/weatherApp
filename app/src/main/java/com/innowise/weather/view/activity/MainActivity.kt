@@ -19,6 +19,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.innowise.weather.HelperFuns.showToast
 import com.innowise.weather.R
 import com.innowise.weather.app.ServiceLocator
 import com.innowise.weather.databinding.ActivityMainBinding
@@ -85,9 +86,6 @@ class MainActivity : AppCompatActivity(), ProgressBarActivity {
         } else { showToast(R.string.error) }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
-
-    private fun showToast(@StringRes strRes: Int) =
-        Toast.makeText(this, strRes, Toast.LENGTH_LONG).show()
 
     companion object {
         private const val REQ_CODE = 132312

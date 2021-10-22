@@ -22,7 +22,7 @@ object ApiImplementation {
         service.getForecast(latitude, longitude).map { it.body()!! }
 }
 
-interface ApiInterface {
+private interface ApiInterface {
     @GET("forecast")
     fun getForecast(
         @Query(value = "lat") latitude: Double,
